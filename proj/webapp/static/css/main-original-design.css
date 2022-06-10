@@ -1,0 +1,161 @@
+body {
+    background: #000;
+    color: #EEE;
+    font-family: arial,sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+
+.header {
+    /*background: rgb(29 12 24);*/
+    /*background: rgb(3 20 51);*/
+    padding: 4px 16px;
+    /*margin-bottom: 20px;*/
+    margin-bottom: 40px;
+}
+
+.header td {
+    width: 0%;
+    white-space: nowrap;
+}
+
+.header td.middle {
+    width: 100%;
+    text-align: center;
+    font-size: 36px;
+}
+
+.header td.temp-humid .wrapper:not(:last-child) {
+    margin-bottom: 4px;
+}
+
+.header td.temp-humid .wrapper * {
+    vertical-align: middle;
+}
+
+.header td.temp-humid .wrapper img {
+    display: inline-block;
+    width: 20px;
+}
+
+.header td.temp-humid .wrapper span {
+    display: inline-block;
+}
+
+
+.buttons {
+    padding-left: 30px;
+    padding-right: 30px;
+    margin-bottom: 40px;
+}
+
+.buttons .row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-bottom: 16px;
+}
+
+.buttons .button {
+    display: inline-block;
+}
+
+.buttons .button .icon-wrapper {
+    display: block;
+    position: relative;
+    width: 160px;
+    height: 100px;
+    padding: 14px;
+    box-sizing: border-box;
+    margin-left: auto;
+    margin-right: auto;
+    background: linear-gradient(45deg, #2d6c80, #0e4879);
+}
+
+.buttons .button.on .icon-wrapper {
+    background: linear-gradient(45deg, #50bde0, #1761a0);
+}
+
+.buttons .button .icon-wrapper .bg-wrapper {
+    display: block;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    bottom: 2px;
+    right: 2px;
+    overflow: hidden;
+}
+
+.buttons .button .icon-wrapper .bg-wrapper .bg {
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    top: -100%;
+    left: -100%;
+    background: radial-gradient(#29296d, black 70%);
+}
+
+.buttons .button.on .icon-wrapper .bg-wrapper .bg {
+    background: radial-gradient(#2e2ee8, #181a5f 100%);
+}
+
+.buttons .button .icon-wrapper img {
+    display: block;
+    position: relative;
+    max-width: 100%;
+    max-height: 100%;
+    margin: 0 auto;
+}
+
+.buttons .button .text {
+    text-align: center;
+    font-size: 24px;
+    margin-top: 4px;
+}
+
+
+.battery {
+    position: relative;
+}
+
+.battery img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.battery .fill-wrapper {
+    position: absolute;
+    top: 15%;
+    left: 23%;
+    bottom: 4%;
+    right: 23%;
+}
+
+.battery .fill {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: #1579d0;
+}
+
+.battery-container {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.battery-container .battery {
+    margin: 0 auto;
+    margin-bottom: 10px;
+}
+
+.battery-container .text {
+    text-align: center;
+}

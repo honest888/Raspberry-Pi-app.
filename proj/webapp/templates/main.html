@@ -1,0 +1,313 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+<style>
+    .blink {
+        animation: blinker 1s step-start infinite;
+      }
+      
+      @keyframes blinker {
+        50% {
+          color: red;
+        }
+    }
+</style>
+<span id="refresh_interval" style="display: none;">{{data.refresh_interval}}</span>
+<span id="current_battery_level" style="display: none;">{{data.battery_level.battery_level}}</span>
+<!-- <input type="text" class="browser-default"> -->
+
+<div class="row" style="padding: 10px; margin-bottom:0px">
+    {% for tile in data.tilesList %}
+        
+        {% if loop.index0 < data.total_title_to_display %} 
+            <div data-index="{{loop.index0}}" data-tile_file_mapping="{{tile.tile_file_mapping}}" class="tile col l3 s12 m3 tile_file_mapper_div" style="margin-bottom: 0px !important;">
+     
+                <div style="margin: 0px 1vw;height:150px;margin-bottom: 15px !important;" >
+                    
+                       
+                        <div id="{{loop.index0}}" class="tile_inner_container z-depth-2 " style="display:flex;flex-direction: row;justify-content: center;align-items: center;">
+                      
+                
+                        
+                        <img  src="/static/img/{{tile.tile_icon}}" alt="Power" style="width:120px;padding:5px" class="center">
+                    </div> 
+                    <h5 class="center" style="margin-top: 2px;">{{tile.tile_name}}</h5>
+                </div>
+            </div>
+        {% endif %}
+            
+
+
+    {% endfor %}
+
+
+
+    <!-- Battery Modal --> 
+    <!-- Modal Structure -->
+  <div id="modal1" class="modal">
+    <div class="modal-content"> 
+      <canvas id="battery_chart" style="width:100%;max-width:100%"></canvas>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+    </div>
+  </div>
+    
+    
+    <!-- Battery Tile -->
+     
+    {% if data.battery_tile_display_status %}
+        
+    
+    <div class="battery_tile col l3 s12 m3" style="margin-bottom: 0px !important;">
+        <a id="battery_tile_modal_trigger" class=" modal-trigger " href="#modal1" style="color:inherit !important">
+      <center>
+        <div style="margin: 0px 0vw;height:120px;margin-bottom: 15px !important;margin-left: 1vw !important;">
+            <div style="width:200px;height:120px;position:absolute" >
+                <center>
+                    <div style="position:absolute;border: 0px solid green;width:100%;height:100%;">
+                        <div id="parent_stack" style="border: 0px solid rgb(1, 216, 12);">
+                            <!-- Stack -->
+                            <div style="display: flex;flex-direction: column;justify-content: center;">
+                                <div id="upper_stack"  ></div> 
+                                <div id="lower_stack"></div>
+                            </div>
+        
+                        </div>
+                    </div>
+                    <img  id="battery_img" style="width:120px;padding:5px;position: relative;" src="./static/img/battery.svg" alt="">
+                    <h5 class="center " id="battery_level" style="margin-top: 2px;">{{data.battery_level.percentage}} % ({{data.battery_level.battery_level}} V)  </h5>
+                </center>
+        
+        
+            </div>
+           
+           
+        </div>
+      </center>
+        </a>
+    </div>
+    
+    {% endif %}
+ 
+    
+ 
+
+
+</div> 
+
+
+{% if data.weather_widget_display_status %}
+    
+{% include "weather-widget.html" %}
+{% endif %}
+
+<script>
+
+var data = {{ data | tojson }};   
+ 
+
+function updateBatteryStatus(percent,color){
+    if(percent>100){
+        percent = 100
+    }
+    var parent_stack = $('#parent_stack');
+    var battery_img = $('#battery_img');
+    parent_stack.css('height',battery_img.height() - 0.20*  battery_img.height() )
+    parent_stack.css('margin-top', 0.20*  battery_img.height() )
+    parent_stack.css('width',battery_img.width()- (40/100)*battery_img.width() )
+    var parent_stack_heigth = parent_stack.height()
+
+
+    var upper_stack = $('#upper_stack');
+    var lower_stack = $('#lower_stack');
+    upper_stack.css('height',parent_stack_heigth/2)
+    lower_stack.css('height',parent_stack_heigth/2)
+    var percent_height = (percent/100)*parent_stack_heigth
+    lower_stack.css('height',percent_height)
+    upper_stack.css('height',parent_stack_heigth-percent_height) 
+    lower_stack.css('background-color',color) 
+}
+
+
+
+$(document).ready(function(){ 
+    console.log('doc ready a')
+    setTimeout(function(){
+
+        updateBatteryStatus(data.battery_level.percentage,data.battery_color) 
+    },1)
+})
+
+
+
+
+function flashFunction(){
+    var flash_config_value = data.battery_flash;
+    var current_battery_level =  parseFloat($('#current_battery_level').html()) 
+    if (current_battery_level<=flash_config_value){ 
+        $('#battery_level').addClass("blink") 
+    }else{
+        $('#battery_level').removeClass("blink")
+
+    } 
+
+}
+
+setInterval(flashFunction,500)
+
+var xValues = [];
+var yValues = [];
+
+var battery_chart = new Chart("battery_chart", {
+  type: "line",
+  data: {
+    labels: xValues,
+    datasets: [{
+      fill: false,
+      lineTension: 0,
+      backgroundColor: "rgba(0,0,255,1.0)",
+      borderColor: "rgba(0,0,255,0.1)",
+      data: yValues
+    }]
+  },
+  options: {
+    legend: {display: false},
+    scales: {
+      yAxes: [{ticks: {min: data.battery_min_max[0] , max:14.5  }}],
+    }
+  }
+});
+
+
+
+$('#battery_tile_modal_trigger').click(function(){
+    $.ajax({
+        url: "/get_battery_tile_chart_data",
+        success: function(res){
+            //var data = res.data
+            console.log('battery_tile_modal_trigger')
+            var data = battery_chart.config.data;
+            
+            var min = Math.min.apply(Math,res.data.dataset.filter(Number))
+            var max = Math.max.apply(Math,res.data.dataset)
+            console.log(min)
+            console.log(max)
+            
+            data.datasets[0].data = res.data.dataset;
+            data.labels = res.data.labels;
+            
+            battery_chart.options.scales.yAxes[0].ticks.min = min
+            battery_chart.options.scales.yAxes[0].ticks.max = max
+            
+            battery_chart.update();
+            
+        }
+    })
+})
+
+
+
+var battery = null;
+
+$(function(){
+        battery = $("#battery").battery({
+        backgroundColor: '#f0f0f0',
+        batteryColor: '#16A085',
+        maxWidth:100
+    });   
+    battery.Update(data.battery_level.percentage,data.battery_color); 
+})
+ 
+
+setInterval(function () {
+    $.ajax({
+        url:"/get_battery_level",
+        success: function(res){
+            $('#battery_level').html(res.battery_level.percentage + " % " + `(${res.battery_level.battery_level} V)`)
+            $('#current_battery_level').html(res.battery_level.battery_level)
+            updateBatteryStatus(res.battery_level.percentage,res.battery_color) 
+ 
+        }
+    })
+},data.refresh_interval*1000);
+
+
+
+function updateTile(id,state){
+    var tile_inner_container = $(".tile_inner_container#"+id)
+
+    var base_color = data.tile_colors[0]
+    var shade_1 = data.tile_colors[1]
+    var shade_2 = data.tile_colors[2] 
+    
+    if(state==0){ 
+        if(! tile_inner_container.hasClass(base_color)){ 
+            tile_inner_container.addClass(shade_1)
+            tile_inner_container.addClass(base_color)
+            
+        }
+    }else{ 
+        tile_inner_container.removeClass(base_color) 
+        tile_inner_container.removeClass(shade_1)
+    }
+}
+
+
+$('.tile').click(function(){
+    var tile_file_mapping = $(this).data('tile_file_mapping')
+    var index = $(this).data('index')
+    $.ajax({
+        url: "/run_mapped_python_file",
+        data: {"index":index,'tile_file_mapping':tile_file_mapping},
+        success: function(res){
+            state = parseInt(res.state)
+            updateTile(index,state)
+        }
+    })
+})
+
+
+
+function realTimeTileStatusUpdate(){
+    var required_tiles = $('div.tile_file_mapper_div');
+    var dict = {}
+    /* console.log("required_tiles") */
+    for(var x=0;x<required_tiles.length;x++){
+        var tile_file_mapping = $(required_tiles[x]).data('tile_file_mapping')
+        var index = $(required_tiles[x]).data('index')
+        dict[index] = tile_file_mapping 
+    } 
+    $.ajax({
+        url:"/get_tiles_states",
+        data:{"data":JSON.stringify(dict)},
+        success: function(res){
+            var states = res.states 
+            for (var key in states) { 
+                if (states.hasOwnProperty(key)) {           
+                    /* console.log(key, states[key]); */
+                    updateTile(key, states[key]) 
+                }
+            }
+        }
+    })
+}
+
+function reloadPage() {
+    console.log('reloadPage');
+    location = '';
+}
+
+$(document).ready(function(){
+    console.log('doc ready b')
+    realTimeTileStatusUpdate();
+    setInterval(realTimeTileStatusUpdate,1000);
+    setInterval(reloadPage,60*60*1000);
+})
+
+
+</script>
+
+{% endblock content %}

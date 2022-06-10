@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Control Panel</title>
+
+        <script type="application/javascript" src="/static/js/jquery-3.6.0.min.js"></script>
+
+        <script type="application/javascript" src="/static/js/main.js"></script>
+        <link rel="stylesheet" href="/static/css/main.css">
+    </head>
+    <body>
+        <div class="header">
+            <table>
+                <tbody>
+                    <tr>
+                        <td><img id="power" src="/static/img/power-button.svg" alt="Power" style="width: 36px;"></td>
+                        <td class="middle"><span id="current-time">13:26</span></td>
+                        <td class="temp-humid">
+                            <div class="wrapper">
+                                <img src="/static/img/thermometer.svg" alt="Temperature">
+                                <span id="temp" class="text">20.9&deg;C</span>
+                            </div>
+                            <div class="wrapper">
+                                <img src="/static/img/humidity.svg" alt="Temperature">
+                                <span id="humid" class="text">48.3%</span>
+                            </div>
+                            <div id="temp-wrapper"></div>
+                            <div id="humid"></div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="buttons">
+            <div class="row">
+                <div class="button on">
+                    <div class="icon-wrapper">
+                        <div class="bg-wrapper">
+                            <div class="bg"></div>
+                        </div>
+                        <img class="icon" src="/static/img/kitchen.svg">
+                    </div>
+                    <div class="text">Kitchen</div>
+                </div>
+                <div class="button">
+                    <div class="icon-wrapper">
+                        <div class="bg-wrapper">
+                            <div class="bg"></div>
+                        </div>
+                        <img class="icon" src="/static/img/fridge.svg">
+                    </div>
+                    <div class="text">Fridge</div>
+                </div>
+                <div class="button">
+                    <div class="icon-wrapper">
+                        <div class="bg-wrapper">
+                            <div class="bg"></div>
+                        </div>
+                        <img class="icon" src="/static/img/usb.svg">
+                    </div>
+                    <div class="text">USB</div>
+                </div>
+                <div class="button">
+                    <div class="icon-wrapper">
+                        <div class="bg-wrapper">
+                            <div class="bg"></div>
+                        </div>
+                        <img class="icon" src="/static/img/heater.svg">
+                    </div>
+                    <div class="text">Heater</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="button">
+                    <div class="icon-wrapper">
+                        <div class="bg-wrapper">
+                            <div class="bg"></div>
+                        </div>
+                        <img class="icon" src="/static/img/lightbulb.svg">
+                    </div>
+                    <div class="text">Lights</div>
+                </div>
+                <div class="button">
+                    <div class="icon-wrapper">
+                        <div class="bg-wrapper">
+                            <div class="bg"></div>
+                        </div>
+                        <img class="icon" src="/static/img/plug.svg">
+                    </div>
+                    <div class="text">4.3Amp</div>
+                    <!-- Power? -->
+                </div>
+                <div class="button">
+                    <div class="icon-wrapper">
+                        <div class="bg-wrapper">
+                            <div class="bg"></div>
+                        </div>
+                        <img class="icon" src="/static/img/solar-panel.svg">
+                    </div>
+                    <div class="text">5.4Amps</div>
+                    <!-- Solar? -->
+                </div>
+                <div class="button">
+                    <div class="icon-wrapper">
+                        <div class="bg-wrapper">
+                            <div class="bg"></div>
+                        </div>
+                        <img class="icon" src="/static/img/voltage.svg">
+                    </div>
+                    <div class="text">12.6V</div>
+                    <!-- Car? -->
+                </div>
+            </div>
+        </div>
+
+        <div class="battery-container">
+            <div class="battery" style="width: 120px; height: 120px;">
+                <div class="fill-wrapper">
+                    <div class="fill"></div>
+                </div>
+                <img src="/static/img/battery.svg">
+            </div>
+            <div class="text">50%</div>
+        </div>
+    </body>
+</html>

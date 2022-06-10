@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Control Panel</title>
+
+        <script type="application/javascript" src="/static/js/jquery-3.6.0.min.js"></script>
+
+        <script type="application/javascript" src="/static/js/main.js"></script>
+        <link rel="stylesheet" href="/static/css/main.css">
+    </head>
+    <body>
+        <script type="application/javascript">
+            var CONFIG = {{ config | tojson }};
+            var data = {{ data | tojson }};
+        </script>
+        <div class="header">
+            <div class="left">
+                <img id="master-power-off" src="/static/img/power-button.svg" alt="Power" style="width: 36px;">
+            </div>
+            <div class="middle">
+                <span id="current-time">13:26</span></td>
+            </div>
+            <div class="right temp-humid">
+                <div class="wrapper">
+                    <img src="/static/img/thermometer.svg" alt="Temperature">
+                    <span id="temp" class="text">20.9&deg;C</span>
+                </div>
+                <div class="wrapper">
+                    <img src="/static/img/humidity.svg" alt="Temperature">
+                    <span id="humid" class="text">48.3%</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="buttons">
+            <div class="row">
+                <div id="kitchen" class="button on">
+                    <div class="icon-wrapper">
+                        <div class="bg-wrapper">
+                            <div class="bg"></div>
+                        </div>
+                        <img class="icon" src="/static/img/kitchen.svg">
+                    </div>
+                    <div class="text">Kitchen</div>
+                </div>
+                <div id="fridge" class="button">
+                    <div class="icon-wrapper">
+                        <div class="bg-wrapper">
+                            <div class="bg"></div>
+                        </div>
+                        <img class="icon" src="/static/img/fridge.svg">
+                    </div>
+                    <div class="text">Fridge</div>
+                </div>
+                <div id="usb" class="button">
+                    <div class="icon-wrapper">
+                        <div class="bg-wrapper">
+                            <div class="bg"></div>
+                        </div>
+                        <img class="icon" src="/static/img/usb.svg">
+                    </div>
+                    <div class="text">USB</div>
+                </div>
+            </div>
+            <div class="row">
+                <div id="heater" class="button">
+                    <div class="icon-wrapper">
+                        <div class="bg-wrapper">
+                            <div class="bg"></div>
+                        </div>
+                        <img class="icon" src="/static/img/heater.svg">
+                    </div>
+                    <div class="text">Heater</div>
+                </div>
+                <div id="lights" class="button">
+                    <div class="icon-wrapper">
+                        <div class="bg-wrapper">
+                            <div class="bg"></div>
+                        </div>
+                        <img class="icon" src="/static/img/lightbulb.svg">
+                    </div>
+                    <div class="text">Lights</div>
+                </div>
+                <div id="inverter" class="button">
+                    <div class="icon-wrapper">
+                        <div class="bg-wrapper">
+                            <div class="bg"></div>
+                        </div>
+                        <img class="icon" src="/static/img/inverter.png">
+                    </div>
+                    <div class="text">Inverter</div>
+                </div>
+            </div>
+            <div class="row">
+                <div id="power" class="button">
+                    <div class="icon-wrapper">
+                        <div class="bg-wrapper">
+                            <div class="bg"></div>
+                        </div>
+                        <img class="icon" src="/static/img/energy-consumption.svg">
+                    </div>
+                    <div class="text">5.4Amps</div>
+                </div>
+                <div id="battery" class="button">
+                    <div class="icon-wrapper">
+                        <div class="bg-wrapper">
+                            <div class="bg"></div>
+                        </div>
+                        <div class="battery">
+                            <div class="fill-wrapper">
+                                <div class="fill"></div>
+                            </div>
+                            <img src="/static/img/battery.svg">
+                        </div>
+                    </div>
+                    <div class="text flash-on-danger flash1">50%</div>
+                </div>
+                <div id="co2-gas" class="button embedded-info">
+                    <div class="icon-wrapper">
+                        <div class="bg-wrapper">
+                            <div class="bg"></div>
+                        </div>
+                        <div class="row-wrapper">
+                            <div class="row line-1">
+                                <img class="inner-icon" src="/static/img/co2.svg">
+                                <span id="co2" class="inner-text flash-on-danger flash1">4%</span>
+                            </div>
+                            <div class="row line-2">
+                                <img class="inner-icon" src="/static/img/gas.svg" style="width: 34px; padding-right: 3px; padding-left: 3px;">
+                                <span id="gas" class="inner-text flash-on-danger flash1">6%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text">Gas Levels</div>
+                    <!-- Car? -->
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

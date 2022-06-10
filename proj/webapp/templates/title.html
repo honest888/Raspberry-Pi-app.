@@ -1,0 +1,172 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<style>
+.enlarge_text{
+    font-size: 20px !important; 
+    font-weight: bold !important;
+} 
+.title_text {
+    margin-top: 50px;
+    padding: 2%;
+    font-size: 40px !important;
+    font-weight: bold !important;
+}
+
+.center_object {
+    display: flex; 
+    flex-direction: row; 
+    justify-content: center; 
+    align-items: center;
+}
+.inline {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: space-between;
+    align-items: baseline;
+    margin-top: 20px;
+}
+.inline span {
+    margin-left: 40px;
+}
+.inline select {
+    margin-left: -40px;
+}
+.left-align label {
+    color: white;
+}
+</style>
+
+
+<div class="row">
+ 
+<div class="col s12 l12 m12">
+    
+    <!-- This is title div -->
+    <div class="center_object">
+        <span class="title_text">
+            Optional Titles
+        </span> 
+    </div>
+    
+    <div style="margin: 5% 25%;">
+        
+        <!-- This is battery div -->
+        <div class="left-align">
+            <div>
+                <label class="tooltipped" data-position = "top" data-tooltip = "Check to watch battery state.">
+                    {% if data.battery_tile_display_status %}
+                    
+                    <input id="battery_tile_display_status"  type="checkbox" class="filled-in" checked="checked" />
+                    
+                    {% else %}
+                    <input id="battery_tile_display_status"  type="checkbox" class="filled-in"  />
+                    
+                    {% endif %}
+                    
+                    <span class="enlarge_text">Battery Power</span>
+                </label>
+            </div>
+            
+            <div class="inline">
+                <!-- This is battery types -->
+                <span class="enlarge_text">Type</span>
+                <select  id="battery_types" class="browser-default tooltipped" data-position = "top" data-tooltip = "Set battery types" style="width:110px; margin-left: 5px;">
+                    {% for x in range(data.battery_types|length) %}
+                    {% if data.current_battery_index == x %}
+                        <option value="{{ x }}" selected>{{data.battery_types[x]}}</option>
+                    {% else %}
+                        <option value="{{ x }}">{{data.battery_types[x]}}</option>
+                    {% endif %}
+                        
+                    {% endfor %}
+                </select>
+      
+
+            <!-- This is fine tune value -->
+                <span class="enlarge_text">Fine Tune</span>
+                <select  id="fine_tune" class="browser-default tooltipped" data-position = "top" data-tooltip = "Set value of fine tune"  style="width:70px; margin-left: 5px;">
+                    {% for x in range(-5,6,1) %}
+                    {% if data.fine_tune == x / 10 %}
+                        <option value="{{ x / 10 }}" selected>{{x / 10}}</option>
+                    {% else %}
+                        <option value="{{ x / 10 }}">{{x / 10}}</option>
+                    {% endif %}
+                        
+                    {% endfor %}
+                </select>
+            </div>
+
+        </div>
+        
+        <!-- This is weather widget div -->
+        <div class="left-align" style="margin-top:50px;">
+            <div>
+                <label class="tooltipped" data-position = "top" data-tooltip = "Check to watch weather forecast.">
+                    {% if data.weather_widget_display_status %}
+                    
+                    <input id="weather_widget_display_status"  type="checkbox" class="filled-in" checked="checked" />
+                    
+                    {% else %}
+                    <input id="weather_widget_display_status"  type="checkbox" class="filled-in"  />
+                    
+                    {% endif %}
+                    
+                    <span class="enlarge_text">Weather Widget </span>
+                </label>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+$(document).ready(function(){
+    $('.tooltipped').tooltip();
+});
+$('#battery_tile_display_status').change(function(){
+    var status = $(this).is(':checked')
+    $.ajax({
+        url:"/set_battery_tile_display_status",
+        data: {'status':status},
+        success: function(res){
+
+        }
+    })
+})
+  
+$('#weather_widget_display_status').change(function(){
+    var status = $(this).is(':checked')
+    $.ajax({
+        url:"/set_weather_widget_display_status",
+        data: {'status':status},
+        success: function(res){
+
+        }
+    })
+ })
+
+$('#battery_types').change(function(){
+    var battery_types_index = $('#battery_types').val()
+    $.ajax({
+        url:"/set_battery_type",
+        data:{'battery_type_index':battery_types_index},
+        success:function(res){
+
+        }
+    })
+})
+
+$('#fine_tune').change(function(){
+    var fine_tune = $('#fine_tune').val()
+    $.ajax({
+        url:"/set_fine_tune",
+        data:{'fine_tune': fine_tune},
+        success: function(res){
+
+        }
+    })
+})
+</script>
+{% endblock content %}

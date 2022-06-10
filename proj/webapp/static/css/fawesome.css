@@ -1,0 +1,406 @@
+/* rating starts css start
+animation
+*/
+
+@-webkit-keyframes loader {
+    0% {
+      width: 0;
+    }
+    10% {
+      width: 10%;
+    }
+    20% {
+      width: 20%;
+    }
+    30% {
+      width: 30%;
+    }
+    40% {
+      width: 40%;
+    }
+    50% {
+      width: 50%;
+    }
+    60% {
+      width: 60%;
+    }
+    70% {
+      width: 70%;
+    }
+    80% {
+      width: 80%;
+    }
+    90% {
+      width: 90%;
+    }
+    100% {
+      width: 100%;
+    }
+  }
+  
+  @-moz-keyframes loader {
+    0% {
+      width: 0;
+    }
+    10% {
+      width: 10%;
+    }
+    20% {
+      width: 20%;
+    }
+    30% {
+      width: 30%;
+    }
+    40% {
+      width: 40%;
+    }
+    50% {
+      width: 50%;
+    }
+    60% {
+      width: 60%;
+    }
+    70% {
+      width: 70%;
+    }
+    80% {
+      width: 80%;
+    }
+    90% {
+      width: 90%;
+    }
+    100% {
+      width: 100%;
+    }
+  }
+  @-o-keyframes loader {
+    0% {
+      width: 0;
+    }
+    10% {
+      width: 10%;
+    }
+    20% {
+      width: 20%;
+    }
+    30% {
+      width: 30%;
+    }
+    40% {
+      width: 40%;
+    }
+    50% {
+      width: 50%;
+    }
+    60% {
+      width: 60%;
+    }
+    70% {
+      width: 70%;
+    }
+    80% {
+      width: 80%;
+    }
+    90% {
+      width: 90%;
+    }
+    100% {
+      width: 100%;
+    }
+  }
+  @-ms-keyframes loader {
+    0% {
+      width: 0;
+    }
+    10% {
+      width: 10%;
+    }
+    20% {
+      width: 20%;
+    }
+    30% {
+      width: 30%;
+    }
+    40% {
+      width: 40%;
+    }
+    50% {
+      width: 50%;
+    }
+    60% {
+      width: 60%;
+    }
+    70% {
+      width: 70%;
+    }
+    80% {
+      width: 80%;
+    }
+    90% {
+      width: 90%;
+    }
+    100% {
+      width: 100%;
+    }
+  }
+  @keyframes loader {
+    0% {
+      width: 0;
+    }
+    10% {
+      width: 10%;
+    }
+    20% {
+      width: 20%;
+    }
+    30% {
+      width: 30%;
+    }
+    40% {
+      width: 40%;
+    }
+    50% {
+      width: 50%;
+    }
+    60% {
+      width: 60%;
+    }
+    70% {
+      width: 70%;
+    }
+    80% {
+      width: 80%;
+    }
+    90% {
+      width: 90%;
+    }
+    100% {
+      width: 100%;
+    }
+  }
+  
+  
+  .score{
+      color: rgb(51, 51, 51);
+      height: 64px;
+      text-align: center;
+      text-decoration: none solid rgb(51, 51, 51);
+      text-rendering: optimizelegibility;
+      white-space: nowrap;
+      word-break: break-word;
+      border: 0px none rgb(51, 51, 51);
+      font: normal normal 100 64px/64px Roboto, Arial, sans-serif;
+      outline: rgb(51, 51, 51) none 0px;
+  }
+  /*Rating starts with SVG*/
+  
+  .rating-stars input {
+    margin-top: 1rem;
+    display:none;
+  }
+  .rating-stars #star-1:checked ~ section [for='star-1'] svg, .rating-stars #star-2:checked ~ section [for='star-1'] svg, .rating-stars #star-2:checked ~ section [for='star-2'] svg, .rating-stars #star-3:checked ~ section [for='star-1'] svg, .rating-stars #star-3:checked ~ section [for='star-2'] svg, .rating-stars #star-3:checked ~ section [for='star-3'] svg, .rating-stars #star-4:checked ~ section [for='star-1'] svg, .rating-stars #star-4:checked ~ section [for='star-2'] svg, .rating-stars #star-4:checked ~ section [for='star-3'] svg, .rating-stars #star-4:checked ~ section [for='star-4'] svg, .rating-stars #star-5:checked ~ section [for='star-1'] svg, .rating-stars #star-5:checked ~ section [for='star-2'] svg, .rating-stars #star-5:checked ~ section [for='star-3'] svg, .rating-stars #star-5:checked ~ section [for='star-4'] svg, .rating-stars #star-5:checked ~ section [for='star-5'] svg {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  .rating-stars #star-1:checked ~ section [for='star-1'] svg path, .rating-stars #star-2:checked ~ section [for='star-1'] svg path, .rating-stars #star-2:checked ~ section [for='star-2'] svg path, .rating-stars #star-3:checked ~ section [for='star-1'] svg path, .rating-stars #star-3:checked ~ section [for='star-2'] svg path, .rating-stars #star-3:checked ~ section [for='star-3'] svg path, .rating-stars #star-4:checked ~ section [for='star-1'] svg path, .rating-stars #star-4:checked ~ section [for='star-2'] svg path, .rating-stars #star-4:checked ~ section [for='star-3'] svg path, .rating-stars #star-4:checked ~ section [for='star-4'] svg path, .rating-stars #star-5:checked ~ section [for='star-1'] svg path, .rating-stars #star-5:checked ~ section [for='star-2'] svg path, .rating-stars #star-5:checked ~ section [for='star-3'] svg path, .rating-stars #star-5:checked ~ section [for='star-4'] svg path, .rating-stars #star-5:checked ~ section [for='star-5'] svg path {
+      fill: #fffc0a;
+      stroke: #000000;
+  }
+  .rating-stars section {
+    width: 300px;
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate3d(-50%, -50%, 0);
+            transform: translate3d(-50%, -50%, 0);
+  }
+  .rating-stars section label {
+    display: inline-block;
+    width: 12%;
+    text-align: center;
+    cursor: pointer;
+  }
+  .rating-stars section label svg {
+    width: 100%;
+    height: auto;
+    fill: #f5f5f5;
+    stroke: #444;
+    -moz-transform: scale(0.8);
+    -o-transform: scale(0.8);
+    -ms-transform: scale(0.8);
+    -webkit-transform: scale(0.8);
+    transform: scale(0.8);
+    -moz-transition: -webkit-transform 200ms ease-in-out;
+    -o-transition: -webkit-transform 200ms ease-in-out;
+    -ms-transition: -webkit-transform 200ms ease-in-out;
+    -webkit-transition: -webkit-transform 200ms ease-in-out;
+    transition: transform 200ms ease-in-out;
+  }
+  .rating-stars section label svg path {
+    -moz-transition: fill 200ms ease-in-out, stroke 100ms ease-in-out;
+    -o-transition: fill 200ms ease-in-out, stroke 100ms ease-in-out;
+    -ms-transition: fill 200ms ease-in-out, stroke 100ms ease-in-out;
+    -webkit-transition: fill 200ms ease-in-out, stroke 100ms ease-in-out;
+    transition: fill 200ms ease-in-out, stroke 100ms ease-in-out;
+  }
+  .rating-stars section label[for="star-null"] {
+    display: block;
+    margin: 0 auto;
+    color: #999;
+  }
+  .rating-stars,.start-value{
+      display: inline-block;
+      width: 100%;
+      height: 22px;
+      position: relative;
+      text-align: center;
+      margin-top: 12px;
+  }
+  .start-value{
+    margin-top: -8px;
+  }
+  .start-value .item,.start-value .wotes{
+      display: none;
+  }
+  /* rating starts css start*/
+  .reviews-stats{
+    color: rgb(141, 141, 141);
+      height: 21px;
+      text-align: center;
+      white-space: nowrap;
+      word-break: break-word;
+      border: 0px none rgb(141, 141, 141);
+      font: normal normal 300 12px/18px Roboto, Arial, sans-serif;
+      outline: rgb(141, 141, 141) none 0px;
+  }
+  .reviewers-small{
+      background-position: 50% 50%;
+      color: rgb(141, 141, 141);
+      display: inline-block;
+      height: 16px;
+      position: relative;
+      text-align: center;
+      top: 3px;
+      white-space: nowrap;
+      width: 16px;
+      word-break: break-word;
+      background: rgba(0, 0, 0, 0) url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAaUlEQVQ4y2P4//8/AyWYYXAZAAPl5eUCQLwBiP9DMYgtQIoBC5A0w/ACUgw4gMWAA3Q1IACLAQFEGwA1xACIG6DYACRGqgEOyJgoA6C2bsDifOToNMBnwAc8mmH4Az4D/hODB3FeIAcDAOCAkSuzHR61AAAAAElFTkSuQmCC) no-repeat scroll 50% 50% / auto padding-box border-box;
+      border: 0px none rgb(141, 141, 141);
+      font: normal normal 300 12px/18px Roboto, Arial, sans-serif;
+  }
+  .reviews-num{
+    color: rgb(141, 141, 141);
+    text-align: center;
+    text-decoration: none;
+    white-space: nowrap;
+    word-break: break-word;
+    border: 0px none rgb(141, 141, 141);
+    font: normal normal 300 12px/18px Roboto, Arial, sans-serif;
+    outline: rgb(141, 141, 141) none 0px;
+  }
+  /*Right side of hreview*/
+  .rating-histogram{
+    color: rgb(51, 51, 51);
+    position:relative;
+    text-align: left;
+    text-decoration: none;
+    text-rendering: optimizelegibility;
+    vertical-align: top;
+    white-space: nowrap;
+    word-break: break-word;
+    border: 0px none rgb(51, 51, 51);
+    font: normal normal 300 12px/18px Roboto, Arial, sans-serif;
+    outline: rgb(51, 51, 51) none 0px;
+    padding: 0;
+  }
+  .rating-histogram .row{
+     margin-bottom: 0px;
+  }
+  .rating-bar-container{
+    color: rgb(115, 115, 115);
+    height: 23px;
+    position: relative;
+    text-align: left;
+  }
+  .bar-label{
+    color: rgb(115, 115, 115);
+    display: block;
+    height: 18px;
+    left: -30px;
+    letter-spacing: 1px;
+    position: absolute;
+    text-align: left;
+    top: 4px;
+    width: 23px;
+  }
+  .star-tiny{
+    color: rgb(115, 115, 115);
+    display: inline-block;
+    height: 16px;
+    letter-spacing: 1px;
+    position: relative;
+    text-align: left;
+    top: -1px;
+    vertical-align: middle;
+    white-space: nowrap;
+    width: 16px;
+    word-break: break-word;
+    background: rgba(0, 0, 0, 0) url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAAdElEQVQoz2P4//8/AzmYgWKN6KC4uDgBhGF8UjQ+AGGSNEJt+w/FCXg1AhUUAHEDEB8A4g9IGj9AxUByBdg0LkBSjAsvwOpUApoX4PUjUMEFLJouEAwcSjTCFB+AYjAfr0agAgNo/AUgGRQAFTOgbpIjFQMAtcfKBD81ItYAAAAASUVORK5CYII=) repeat scroll 0% 0% / auto padding-box border-box;
+    font: normal normal normal 11px/18px Roboto, Arial, sans-serif;
+  }
+  .bar {
+    color: rgb(115, 115, 115);
+    display: inline-block;
+    height: 23px;
+    opacity: 0.800000011920929;
+    text-align: left;
+    z-index: 0;
+    border: 0px none rgb(115, 115, 115);
+    font: normal normal normal 12px/18px Roboto, Arial, sans-serif;
+    outline: rgb(115, 115, 115) none 0px;
+    transition: width 0.25s ease 0s;
+  }
+  .five .bar{
+    background: rgb(136, 177, 49) none repeat scroll 0% 0% / auto padding-box border-box;
+    animation: loader 2s ease;
+    width: 100%;
+  }
+  .four .bar{
+    background: rgb(153, 204, 0) none repeat scroll 0% 0% / auto padding-box border-box;
+      animation: loader 2s ease;
+    width: 100%;
+  }
+  .tree .bar{
+    background: rgb(255, 207, 2) none repeat scroll 0% 0% / auto padding-box border-box;
+      animation: loader 2s ease;
+    width: 100%;
+  }
+  .two .bar{
+    background: rgb(255, 159, 2) none repeat scroll 0% 0% / auto padding-box border-box;
+    animation: loader 2s ease;
+    width: 100%;
+  }
+  .one .bar{
+    background: rgb(255, 111, 49) none repeat scroll 0% 0% / auto padding-box border-box;
+    animation: loader 2s ease;
+    width: 10%;
+  }
+  .bar-number{
+      color: rgb(51, 51, 51);
+      display: block;
+      height: 18px;
+      left: 5px;
+      position: absolute;
+      text-align: left;
+      text-decoration: none solid rgb(51, 51, 51);
+      text-rendering: optimizelegibility;
+      top: 4px;
+      white-space: nowrap;
+      width: 26px;
+      word-break: break-word;
+      border: 0px none rgb(51, 51, 51);
+      font: normal normal normal 11px/18px Roboto, Arial, sans-serif;
+      outline: rgb(51, 51, 51) none 0px;
+  }
+  /* rating starts css start*/

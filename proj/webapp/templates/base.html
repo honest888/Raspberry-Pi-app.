@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>SavvyVan Control Panel</title>
+
+        <script type="application/javascript" src="/static/js/jquery-3.6.0.min.js"></script>
+
+
+        <script type="application/javascript" src="/static/js/kioskboard.js"></script> 
+        <link rel="stylesheet" href="/static/css/kioskboard.css">
+        
+        <link rel="shortcut icon" href="/static/img/Profile_transparent_small.png" type="image/x-icon">
+
+        <script type="application/javascript" src="/static/js/battery.js"></script>
+        <script type="application/javascript" src="/static/js/charts.js.js"></script>
+        <script type="application/javascript" src="/static/js/materialize.js"></script> 
+        <link rel="stylesheet" href="/static/css/materialize.css">
+        <link rel="stylesheet" href="/static/css/fawesome.css">
+        <link rel="stylesheet" href="/static/css/battery.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+        <link rel="stylesheet" href="/static/css/font.css">
+
+<style>
+ 
+    footer {
+        position: fixed; 
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+        margin-bottom: 0px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: row;
+        padding-right: 20px;
+        
+    }
+ 
+    footer img{ 
+        height: 50px !important
+    }
+    body {
+        margin-bottom:50px;
+    }
+    #current-time{
+        font-size: 60px !important;
+    }
+    .btn{
+        text-transform: none !important;
+    }
+    
+</style>
+
+    </head>
+    <!-- <body class=" " >  -->
+    <body class="black" style="color:white !important"> 
+        <nav>
+            <div class="nav-wrapper {{data.tile_colors.0}} {{data.tile_colors.2}}">
+
+              <a  id="current-time" class="brand-logo center">0</a>
+                    <a href="#" data-target="slide-out" class="sidenav-trigger show-on-large"><i class="material-icons" style="font-size: 50px;">menu</i></a>
+                    <ul id="nav-mobile" class="left hide-on-med-and-down"> 
+                    </ul>
+              <ul id="nav-mobile" class="right ">
+                <li><a href="/"><i class="material-icons" style="font-size: 40px;">home</i></a></li> 
+                <!-- <li><a href="/settings-page"><i class="material-icons">settings</i></a></li> -->
+                <li><a href="/wifi-settings-page"><i class="material-icons" id="wifi_settings_icon" style="font-size: 40px;">wifi</i></a></li>
+                {% if data.display_external_link_icon %}
+                  
+                <li><a href="http://webapp.savvyvan.co.uk" target="blank"><i class="material-icons">near_me</i></a></li>
+                {% endif %}
+                 
+              </ul>
+            </div>
+          </nav>
+        <div id="slide-out" class="sidenav">
+            <ul>
+        
+                {% for file in data.menu_python_files %}
+                <li class="sidebar_run_python_file" style="cursor: pointer;" data-file_name="{{file}}">
+                    <a>
+                        <span class="left">
+                            {{file.split('.')[0]}}
+                        </span>
+                        <!-- <i class="waves-effect material-icons right green-text sidebar_run_python_file" data-file_name="{{file}}" >play_arrow</i> -->
+                    </a>
+        
+                </li>
+        
+                {% endfor %}
+        
+            </ul>
+        
+        </div>
+
+
+ 
+
+        
+
+
+ 
+      {% block content %}
+        
+      {% endblock content %}
+
+      <br>
+
+      <div style="text-align: center">
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class=flashes>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+      {% endwith %} 
+      </div>
+      
+
+ <footer class="{{data.tile_colors.0}} {{data.tile_colors.2}}">
+    <img src="/static/img/logo.png" alt="" class="">
+
+    <a href="/settings-page"><i class="waves-effect material-icons white-text" style="font-size: 40px;">settings</i></a>
+</footer>
+
+
+<script type="application/javascript" src="/static/js/kioskboard.js"></script>
+<script type="application/javascript" src="/static/js/kioskboard-aio.js"></script>
+<script type="application/javascript" src="/static/js/kioskboard-settings.js"></script>
+<link rel="stylesheet" href="/static/css/kioskboard.css">
+
+<script>
+   
+ 
+
+</script>
+
+
+
+
+
+
+
+<script>
+
+setInterval(function(){
+    var today = new Date(); 
+    var time = 0;
+    if (  parseInt(today.getMinutes())<10){
+        var minutes = '0' +  parseInt(today.getMinutes()).toString();
+    }else{
+        minutes =  parseInt(today.getMinutes())
+    } 
+    $('#current-time').html(today.getHours() + ":" + minutes)
+
+},1000)
+
+
+
+
+setInterval(function(){
+$.ajax({
+    url:'https://httpbin.org/ip',
+    timeout: 3000, 
+    success: function(res){
+        $('#wifi_settings_icon').addClass("white-text")
+        $('#wifi_settings_icon').removeClass("grey-text")
+            //alert(res.origin)
+    },
+    error: function(res){
+        $('#wifi_settings_icon').removeClass("white-text")
+        $('#wifi_settings_icon').addClass("grey-text")
+        //alert ("Error")
+    }
+})
+},2000)
+
+
+
+   
+$('.sidebar_run_python_file').click(function(){
+    console.log('sidebar_run_python_file begin');
+    var file_name = $(this).data('file_name');
+    $.ajax({ 
+        url: "/sidebar_run_python_file",
+        method:"GET",
+        data: {"file_name":file_name},
+        success: function(res){
+
+        }
+    })
+    $('.sidenav').sidenav('close');
+    console.log('sidebar_run_python_file end');
+    
+})
+
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.sidenav');
+    var instances = M.Sidenav.init(elems, {
+        Sidenav:true
+    });
+  });
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.modal');
+    var instances = M.Modal.init(elems, {
+        Modal: true
+    });
+  });
+
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('select');
+    var instances = M.FormSelect.init(elems, {
+        FormSelect:true
+    });
+  });
+
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.collapsible');
+    var instances = M.Collapsible.init(elems, {
+        Collapsible: true
+    });
+  });
+</script>
+     
+    </body>
+</html>

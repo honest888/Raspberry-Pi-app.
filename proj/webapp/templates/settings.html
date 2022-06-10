@@ -1,0 +1,238 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- <input type="text" class="browser-default"> -->
+<style>
+.input_x1{
+    height: 36px !important
+}
+.enlarge_text{
+    font-size: 20px !important; 
+    font-weight: bold !important;
+}
+</style>
+
+
+<div class="row">
+ 
+<center>
+    <div class="col s12 l6 m6">
+        <div>
+            <br>
+                <div style="display: flex;flex-direction: row;justify-content: center;align-items: center;">
+                    <span style="padding-right: 15px" class="enlarge_text">
+                       No. of Tiles
+                    </span> 
+                    <select  id="total_title_to_display" class="browser-default" style="width:150px">
+                        {% for x in data.max_total_title_to_display %}
+                        {% if data.total_title_to_display == x %}
+                            <option value="{{x}}" selected>{{x}}</option>
+                        {% else %}
+                            <option value="{{x}}">{{x}}</option>
+                        {% endif %}
+                            
+                        {% endfor %}
+                     </select>
+                     <!-- <button id="save_total_title_to_display_btn" class="btn right {{data.tile_colors.0}} {{data.tile_colors.2}}">Save</button> -->
+                </div>
+                
+        </div>
+
+
+
+        <div style="padding: 5px  0px;width: 50% !important ">
+            <ul class="collapsible" style="color:black !important;">
+                {% for tile in data.tilesList  %}
+                    <li>
+                        {% if loop.index0 < data.total_title_to_display %}
+                        
+                    <div class="collapsible-header"> 
+                        Tile No. {{loop.index}}
+                    </div>
+                    <div class="collapsible-body"  style="color:white !important;"> 
+                        <div id="{{loop.index}}" style="padding:5px "> 
+                                <!-- <h6>Tile Name: {{tile.tile_name}}</h6>   -->
+                                <select class="browser-default save_tile_info_btn" id="tile_name" data-tile_id="{{loop.index}}">
+                                    <option value="" disabled selected>Choose your option</option>
+                                    {% for valiable_tile in data.avaliable_tiles %}
+                                    {% if tile.tile_name == valiable_tile %}
+                                      <option value="{{valiable_tile}}" selected>{{valiable_tile}}</option>                            
+                                    {% else %}
+                                        <option value="{{valiable_tile}}">{{valiable_tile}}</option>                            
+                                    {% endif %}
+                                    
+                                    {% endfor %} 
+                                  </select>  
+                                <h6 id="{{loop.index}}" class="tile_icon hide">{{tile.tile_icon}}</h6> 
+                         
+                            <!-- <button class="btn save_tile_info_btn {{data.tile_colors.0}} {{data.tile_colors.2}}" id=" {{loop.index}}">
+                                Save 
+                            </button> -->
+                            
+        
+        
+                        </div>
+                    </div>
+                    </li>
+                    {% endif %}
+                {% endfor %}
+              </ul>
+        </div> 
+    </div>
+</center>
+
+
+    <div class="col s12 l6 m6"> 
+  
+        <center>
+            <div style="padding: 0% 15%;margin-top: 30px;">
+                <div>
+                    <span  class="enlarge_text">
+                        Choose Background Color
+                       
+                     </span>  
+
+                    <div style="margin-top: 10px;display: flex;flex-direction: column;justify-content: center;align-items: center;">
+             
+                        <!-- Selection Base class -->
+                        Menu color<select name="" id="select_base_class" class="browser-default"> 
+                            {% for color_class in data.all_color_classes.avaliable_base_color_classes %}
+                            {% if data.tile_colors.0 == color_class %}
+                            <option value="{{color_class}}" selected>{{color_class}}</option>
+                                {% else %}
+                                <option value="{{color_class}}">{{color_class}}</option>
+                                {% endif %}
+                                {% endfor %}
+                            </select>
+                            
+            
+                        <!-- Selection Shade 2 class -->
+                        Menu color shade<select name="" id="select_shade2_class" class="browser-default"> 
+                            {% for color_class in data.all_color_classes.avaliable_shade2_classes %}
+                            {% if data.tile_colors.2 == color_class %}
+                            <option value="{{color_class}}" selected>{{color_class}}</option>
+                            {% else %}
+                            <option value="{{color_class}}">{{color_class}}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+
+                        <!-- Selection Shade 1 class -->
+                        Tile shade<select name="" id="select_shade1_class" class="browser-default"> 
+                            {% for color_class in data.all_color_classes.avaliable_shade1_classes %}
+                            {% if data.tile_colors.1 == color_class %}
+                            <option value="{{color_class}}" selected>{{color_class}}</option>
+                            {% else %}
+                            <option value="{{color_class}}">{{color_class}}</option>
+                            {% endif %}
+                            {% endfor %}
+                        </select>
+                        </select>
+            
+                        
+                        <button style="margin-top: 10px;width: 100%;" id="save_color_value_btn" onclick="save_color_value()"   class="btn right {{data.tile_colors.0}} {{data.tile_colors.2}}">Save</button>
+                        <!-- GO to Optional title page -->
+                        <button style="margin: 35px 0px; width: 100%;" class="btn right {{data.tile_colors.0}} {{data.tile_colors.2}}" onclick="window.location.href='/title-page';">Go to Optional Titles</button>
+                        
+                        <!-- Add email  -->
+                        Notification Email Address
+                        <div class="row" style="width: 100%; margin-top: -15px;">
+                            <div class="input-field col s10" style="padding-left: 0px;">
+                                <input id="email" type="text" class="virtual-keyboard validate" data-kioskboard-type="all" data-kioskboard-specialcharacters="true" placeholder="Enter email" style="background-color: white; border-radius:2px; height: 34px;" value="{{data.email_value}}">
+                                <span class="helper-text" data-error="wrong" data-success="right">Helper text</span>
+                            </div>
+                            <div class="col s2" style="padding-right: 0px;padding-left: 0px;">
+                                <button style="margin-top: 14px;width: 100%;" id="email_add_btn" onclick="emailAdd()" class="btn right {{data.tile_colors.0}} {{data.tile_colors.2}}">Add</button>                  
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </center>
+    </div>
+</div>
+
+<div style="display:flex;flex-direction: row;justify-content:space-between;padding: 5px 30px; font-weight: bold;">
+
+</div>
+
+<p class="z-depth-1 center" style="padding:5px; margin:5px 30px;">
+    {{data.paragraph}}
+</p>
+
+<br><br>
+
+<script>
+
+function save_color_value(){
+    var select_base_class = $('#select_base_class').val() 
+    var select_shade1_class = $('#select_shade1_class').val() 
+    var select_shade2_class = $('#select_shade2_class').val() 
+    $.ajax({
+        url:"/save_color_value",
+        data: {
+            'base_class':select_base_class,
+            'shade1_class':select_shade1_class,
+            'shade2_class':select_shade2_class,
+        },
+        success: function(res){
+            location.reload();
+        }
+    })
+
+}
+
+function emailAdd(){
+    var email = $("#email").val();
+    if($("#email").hasClass('validate valid')) {
+        
+        $.ajax({
+            url:"/add_email",
+            data:{
+                "email":email
+            },
+            success: function(res){
+                
+            }
+        })
+        var toastHtml = '<span style="margin: -25px; font-weight: bold; background-color: white; color: black; box-shadow: 3px; opacity: 0.9; border-radius:2px; padding: 12px;">Email is successfully added.</span>'
+        M.toast({html: toastHtml})
+    }
+}
+$('#total_title_to_display').change(function(){
+    var total_title_to_display = $('#total_title_to_display').val()
+    $.ajax({
+        url:"/save_total_title_to_display",
+        data: {'total_title_to_display':total_title_to_display},
+        success: function(res){
+            location.reload();
+        }
+    })
+
+})
+
+
+
+$('.save_tile_info_btn').change(function(e){
+    //var id = parseInt( this.id)
+    var id = parseInt($(this).data('tile_id'))
+    var parent_div = $('div#'+id)
+    var tile_name = parent_div.find('select#tile_name').val(); 
+    $.ajax({
+        url: "/save_tile_info",
+        method: "GET",
+        data: {'index':id,
+        'tile_name':tile_name, 
+    },
+        success: function(res){ 
+            var tile_icon = parent_div.find('h6.tile_icon') .html(res.tile_icon )
+            console.log(tile_icon) 
+             
+        }
+    })
+})
+</script>
+
+
+{% endblock content %}

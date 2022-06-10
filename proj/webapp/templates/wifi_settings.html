@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- <input type="text" class="browser-default"> -->
+<style>
+.input_x1{
+    height: 36px !important
+}
+</style>
+
+
+
+<center>
+    <div style="width: 50%;">        
+        <div style="padding: 5px 30px ">
+            <div>
+                <fieldset>
+                    <legend>WIFI List</legend>
+                    {% for ssid in data.network_ssids %}
+                        <div>
+                            <fieldset>
+                                <legend>SSID {{loop.index0+1}}</legend>
+
+                                    <h6 class="left">{{ssid}}</h6>
+                                    <i id="{{ssid}}" class="waves-effect material-icons right red-text delete_ssid">delete</i>
+                            </fieldset>
+                        </div>
+                    {% endfor %}
+                </fieldset>
+            </div>
+        </div>
+
+
+        <div style="padding: 5px 30px ">
+            <div >
+                <fieldset>
+                    <legend>Add WIFI</legend>
+                <input id="new_ssid" type="text" class="browser-default input_x1 virtual-keyboard form-control" data-kioskboard-type="all" data-kioskboard-specialcharacters="true" placeholder="Network SSID" style="width: 100%;"> <br><br>
+            
+                <input id="new_password" type="text" class="browser-default input_x1 virtual-keyboard form-control" data-kioskboard-type="all" data-kioskboard-specialcharacters="true" placeholder="WIFI Password" style="width: 100%;"> <br><br>
+            
+                <button class="btn left {{data.tile_colors.0}} {{data.tile_colors.2}}" id="save_netwrok">Save</button>
+            </fieldset>
+            </div>
+
+            <br>
+            <button id="wifi_settings_page_run_py_file" class="btn left {{data.tile_colors.0}} {{data.tile_colors.2}}" style="width: 100%;"> Commit Changes</button>
+        </div>
+
+
+
+
+    </div>
+</center>
+
+
+
+<script>
+
+    $('#wifi_settings_page_run_py_file').click(function(){
+        $.ajax({
+            url: "/wifi_settings_page_run_py_file",
+            method: "GET", 
+            success: function(res){
+                location.reload()
+            }
+        })
+    })
+
+$('#save_netwrok').click(function(e){
+    var ssid =  $('#new_ssid').val();
+    var password =  $('#new_password').val()
+    $.ajax({
+        url: "/save_netwrok",
+        method: "GET",
+        data: {'ssid':ssid,'password':password},
+        success: function(res){
+            location.reload()
+        }
+    })
+})
+
+
+$('.delete_ssid').click(function(e){
+    var id =  this.id
+    $.ajax({
+        url: "/delete_ssid",
+        method: "GET",
+        data: {'ssid':id},
+        success: function(res){
+            
+            location.reload()
+        }
+    })
+})
+
+
+
+</script>
+
+
+{% endblock content %}

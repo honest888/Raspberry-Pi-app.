@@ -1,0 +1,235 @@
+{
+    "base_folder_path": "E:/ControlPanel_lite-main/savvyvan",
+    "settings_page_text_file_path": "message.txt",
+    "battery_file_path": "readings/voltage.txt",
+    "battery_graph_file_path": "readings/voltage_graph.txt",
+    "images_folder_path": "proj/webapp/static/img",
+    "gpio_stat_folder_path": "GPIOStats",
+    "wifi_file_path": "/etc/wpa_supplicant/wpa_supplicant.conf",
+    "wifi_settings_page_run_py_file": "scripts/reload_wifi.py",
+    "menu_folder_path": "menu",
+    "battery_flash": 11.66,
+    "battery_status_refresh_interval": 2,
+    "max_total_title_to_display": 8,
+    "weather_data_api_key": "ae6d37b4d05cadedfacb68d810b2cfc2",
+    "battery_min": 10.5,
+    "battery_max": 15,
+    "display_external_link_icon": "False",
+    "current_battery_index": 1,
+    "fine_tune": 0.4,
+    "email": "SIMON@GMAIL.COM",
+    "battery_types": [
+        {
+            "name": "AGM",
+            "flash": 11.66
+        },
+        {
+            "name": "Lead Acid",
+            "flash": 11.9
+        },
+        {
+            "name": "Lithium",
+            "flash": 12.8
+        }
+    ],
+    "avaliable_base_color_classes": [
+        "amber",
+        "black",
+        "blue",
+        "brown",
+        "cyan",
+        "green",
+        "grey",
+        "indigo",
+        "lime",
+        "orange",
+        "pink",
+        "purple",
+        "red",
+        "teal",
+        "yellow"
+    ],
+    "avaliable_shade1_classes": [
+        "lighten-4",
+        "lighten-3",
+        "lighten-2",
+        "lighten-1",
+        "darken-1",
+        "darken-3",
+        "darken-2",
+        "darken-4"
+    ],
+    "avaliable_shade2_classes": [
+        "lighten-4",
+        "lighten-3",
+        "lighten-2",
+        "lighten-1",
+        "darken-1",
+        "darken-2",
+        "darken-3",
+        "darken-4"
+    ],
+    "avaliable_tiles": [
+        {
+            "tile_name": " ",
+            "tile_icon": "blank.png"
+        },
+        {
+            "tile_name": "Alarm",
+            "tile_icon": "alarm.png"
+        },
+        {
+            "tile_name": "Aux Volt Meter",
+            "tile_icon": "Volt_meter.png"
+        },
+        {
+            "tile_name": "Computer",
+            "tile_icon": "computer.png"
+        },
+        {
+            "tile_name": "Fan",
+            "tile_icon": "fan.png"
+        },
+        {
+            "tile_name": "Fridge",
+            "tile_icon": "fridge.svg"
+        },
+        {
+            "tile_name": "Heater",
+            "tile_icon": "heater.svg"
+        },
+        {
+            "tile_name": "Hob",
+            "tile_icon": "cooking.png"
+        },
+        {
+            "tile_name": "Inverter",
+            "tile_icon": "inverter.png"
+        },
+        {
+            "tile_name": "Lights",
+            "tile_icon": "lightbulb.svg"
+        },
+        {
+            "tile_name": "Oven",
+            "tile_icon": "cooker.png"
+        },
+        {
+            "tile_name": "Projector",
+            "tile_icon": "cinema-projector.png"
+        },
+        {
+            "tile_name": "Radio",
+            "tile_icon": "radio.png"
+        },
+        {
+            "tile_name": "Reading Lights",
+            "tile_icon": "reading_light.png"
+        },
+        {
+            "tile_name": "Satellite",
+            "tile_icon": "satellite-dish.png"
+        },
+        {
+            "tile_name": "Shower",
+            "tile_icon": "shower.png"
+        },
+        {
+            "tile_name": "TV",
+            "tile_icon": "tv.png"
+        },
+        {
+            "tile_name": "USB",
+            "tile_icon": "usb.svg"
+        },
+        {
+            "tile_name": "Water",
+            "tile_icon": "water-drop.png"
+        },
+        {
+            "tile_name": "WiFi",
+            "tile_icon": "wifi.png"
+        }
+    ],
+    "mapped_python_files": [
+        "RelayGPIO25.py",
+        "RelayGPIO8.py",
+        "RelayGPIO7.py",
+        "RelayGPIO100.py",
+        "RelayGPIO12.py",
+        "RelayGPIO16.py",
+        "RelayGPIO20.py",
+        "RelayGPIO21.py"
+    ],
+    "tile_bg_class": "blue",
+    "battery_tile_display_status": "True",
+    "tile_shade_1": "darken-2",
+    "tile_shade_2": "darken-3",
+    "background_color": {
+        "base_class": "blue",
+        "shade1_class": "darken-2",
+        "shade2_class": "darken-3"
+    },
+    "total_title_to_display": 4,
+    "geo_location_city": "London",
+    "weather_data": "",
+    "weather_widget_display_status": "True",
+    "tiles": [
+        {
+            "tile_id": "tile_1",
+            "tile_name": "",
+            "tile_icon": "Profile_transparent_small.png",
+            "tile_file_mapping": "RelayGPIO25.py",
+            "is_active_tile": 1
+        },
+        {
+            "tile_id": "tile_2",
+            "tile_name": "",
+            "tile_icon": "thankyou.png",
+            "tile_file_mapping": "RelayGPIO8.py",
+            "is_active_tile": 1
+        },
+        {
+            "tile_id": "tile_3",
+            "tile_name": "",
+            "tile_icon": "manuals.png",
+            "tile_file_mapping": "RelayGPIO7.py",
+            "is_active_tile": 1
+        },
+        {
+            "tile_id": "tile_4",
+            "tile_name": "",
+            "tile_icon": "begin_config.png",
+            "tile_file_mapping": "RelayGPIO100.py",
+            "is_active_tile": 1
+        },
+        {
+            "tile_id": "tile_5",
+            "tile_name": "TV",
+            "tile_icon": "tv.png",
+            "tile_file_mapping": "RelayGPIO12.py",
+            "is_active_tile": 1
+        },
+        {
+            "tile_id": "tile_6",
+            "tile_name": "USB",
+            "tile_icon": "usb.svg",
+            "tile_file_mapping": "RelayGPIO16.py",
+            "is_active_tile": 1
+        },
+        {
+            "tile_id": "tile_7",
+            "tile_name": "Reading Lights",
+            "tile_icon": "reading_light.png",
+            "tile_file_mapping": "RelayGPIO20.py",
+            "is_active_tile": 1
+        },
+        {
+            "tile_id": "tile_8",
+            "tile_name": "Aux Volt Meter",
+            "tile_icon": "Volt_meter.png",
+            "tile_file_mapping": "RelayGPIO21.py",
+            "is_active_tile": 1
+        }
+    ]
+}

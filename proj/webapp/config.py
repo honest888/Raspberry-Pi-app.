@@ -1,5 +1,5 @@
 # Folder that contains all subsequent files
-INPUT_BASE = "E:/ControlPanel_lite-main/savvyvan"
+INPUT_BASE = "/home/pi/savvyvan"
 #INPUT_BASE = "../sample-data"
 # Folder for GPIO files
 GPIO_BASE = INPUT_BASE + "/GPIOStats"

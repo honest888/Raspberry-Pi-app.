@@ -71,7 +71,7 @@
     
       <div style="display: flex;flex-direction: row ; justify-content:space-around ;align-items: center;padding:5px 3%;margin:0px 7%;border-radius: 10px;" class="z-depth-2">
         <!-- Location -->
-        <div  class="weather_info_unit_div">
+      <div  class="weather_info_unit_div">
             <p>Location</p>
             <p id="weather_location">Loading...</p> 
         </div> 
@@ -106,15 +106,7 @@
             <p id="temperature5">Loading...</p>  
         </div>
     </div>
-
-
-
-
-
-
-
 </div>
-
 
 <script> 
 console.log('begin 3');
@@ -133,6 +125,8 @@ $('#save_geo_location_city').click(function(){
     })
 
 })
+
+
 
 // var data = {{ data | tojson }};   
 // console.log('b');
@@ -178,7 +172,8 @@ console.log('is_allowed: '+String(is_allowed))
 if(is_allowed!=null ){
     console.log('is_allowed not null')
     var latitude = localStorage.getItem('latitude')
-    var longitude = localStorage.getItem('longitude') 
+    var longitude = localStorage.getIt
+    +-+em('longitude') 
     console.log('latitude: '+String(latitude)+' longitude: '+String(longitude))
     getWeatherData(latitude,longitude)
 }else{

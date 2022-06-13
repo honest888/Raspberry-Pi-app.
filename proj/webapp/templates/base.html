@@ -17,7 +17,7 @@
         <link rel="stylesheet" href="/static/css/materialize.css">
         <link rel="stylesheet" href="/static/css/fawesome.css">
         <link rel="stylesheet" href="/static/css/battery.css">
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="/static/css/material-icons.css" rel="stylesheet">
 
         <link rel="stylesheet" href="/static/css/font.css">
 
@@ -118,11 +118,10 @@
         {% endif %}
       {% endwith %} 
       </div>
-      
 
  <footer class="{{data.tile_colors.0}} {{data.tile_colors.2}}">
-    <img src="/static/img/logo.png" alt="" class="">
-
+    <img src="/static/img/logo.png" alt="" class=""> 
+    <marquee id="notification" width = "60%" style="font-size: 22px;">{{data.notification}}</marquee>
     <a href="/settings-page"><i class="waves-effect material-icons white-text" style="font-size: 40px;">settings</i></a>
 </footer>
 
@@ -131,18 +130,6 @@
 <script type="application/javascript" src="/static/js/kioskboard-aio.js"></script>
 <script type="application/javascript" src="/static/js/kioskboard-settings.js"></script>
 <link rel="stylesheet" href="/static/css/kioskboard.css">
-
-<script>
-   
- 
-
-</script>
-
-
-
-
-
-
 
 <script>
 
@@ -155,16 +142,13 @@ setInterval(function(){
         minutes =  parseInt(today.getMinutes())
     } 
     $('#current-time').html(today.getHours() + ":" + minutes)
-
 },1000)
-
-
 
 
 setInterval(function(){
 $.ajax({
     url:'https://httpbin.org/ip',
-    timeout: 3000, 
+    timeout: 2000, 
     success: function(res){
         $('#wifi_settings_icon').addClass("white-text")
         $('#wifi_settings_icon').removeClass("grey-text")
@@ -175,10 +159,19 @@ $.ajax({
         $('#wifi_settings_icon').addClass("grey-text")
         //alert ("Error")
     }
+    
+})
+$.ajax({
+        url:'/load_notification',
+        success: function(res){
+            if(!jQuery.isEmptyObject(res))
+                $('#notification').text(res);
+        },
+        error: function(res){
+            
+        }
 })
 },2000)
-
-
 
    
 $('.sidebar_run_python_file').click(function(){
@@ -227,7 +220,6 @@ $('.sidebar_run_python_file').click(function(){
         Collapsible: true
     });
   });
-</script>
-     
+</script>     
     </body>
 </html>

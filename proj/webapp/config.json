@@ -1,8 +1,10 @@
 {
-    "base_folder_path": "E:/ControlPanel_lite-main/savvyvan",
+    "base_folder_path": "E:/ControlPanel_lite/savvyvan",
     "settings_page_text_file_path": "message.txt",
     "battery_file_path": "readings/voltage.txt",
     "battery_graph_file_path": "readings/voltage_graph.txt",
+    "email_file_path": "emailadd.txt",
+    "volt_modifier_file_path": "scripts/volt_modifier.txt",
     "images_folder_path": "proj/webapp/static/img",
     "gpio_stat_folder_path": "GPIOStats",
     "wifi_file_path": "/etc/wpa_supplicant/wpa_supplicant.conf",
@@ -16,8 +18,10 @@
     "battery_max": 15,
     "display_external_link_icon": "False",
     "current_battery_index": 1,
-    "fine_tune": 0.4,
+    "fine_tune": 0.2,
     "email": "SIMON@GMAIL.COM",
+    "notification_file": "notification.txt",
+    "notification_file_modify_time": "Sun Jun 12 18:18:57 2022",
     "battery_types": [
         {
             "name": "AGM",
@@ -161,18 +165,18 @@
         "RelayGPIO20.py",
         "RelayGPIO21.py"
     ],
-    "tile_bg_class": "blue",
+    "tile_bg_class": "lime",
     "battery_tile_display_status": "True",
     "tile_shade_1": "darken-2",
     "tile_shade_2": "darken-3",
     "background_color": {
-        "base_class": "blue",
+        "base_class": "lime",
         "shade1_class": "darken-2",
         "shade2_class": "darken-3"
     },
-    "total_title_to_display": 4,
+    "total_title_to_display": 6,
     "geo_location_city": "London",
-    "weather_data": "",
+    "weather_data": "{\"cod\": 401, \"message\": \"Invalid API key. Please see http://openweathermap.org/faq#error401 for more info.\"}",
     "weather_widget_display_status": "True",
     "tiles": [
         {
@@ -180,7 +184,7 @@
             "tile_name": "",
             "tile_icon": "Profile_transparent_small.png",
             "tile_file_mapping": "RelayGPIO25.py",
-            "is_active_tile": 1
+            "is_active_tile": 0
         },
         {
             "tile_id": "tile_2",
@@ -201,7 +205,7 @@
             "tile_name": "",
             "tile_icon": "begin_config.png",
             "tile_file_mapping": "RelayGPIO100.py",
-            "is_active_tile": 1
+            "is_active_tile": 0
         },
         {
             "tile_id": "tile_5",
@@ -215,14 +219,14 @@
             "tile_name": "USB",
             "tile_icon": "usb.svg",
             "tile_file_mapping": "RelayGPIO16.py",
-            "is_active_tile": 1
+            "is_active_tile": 0
         },
         {
             "tile_id": "tile_7",
             "tile_name": "Reading Lights",
             "tile_icon": "reading_light.png",
             "tile_file_mapping": "RelayGPIO20.py",
-            "is_active_tile": 1
+            "is_active_tile": 0
         },
         {
             "tile_id": "tile_8",

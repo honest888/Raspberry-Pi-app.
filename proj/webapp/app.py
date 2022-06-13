@@ -1,7 +1,9 @@
+from inspect import CO_ASYNC_GENERATOR
 import json
 import os, os.path
 import datetime
 import subprocess
+from threading import Timer
 from time import sleep
 from traceback import print_exc
 from flask import Flask, request, flash
@@ -9,6 +11,7 @@ from flask import jsonify, render_template
 
 import os.path
 import sys
+import time
 sys.path.append(os.path.join(os.path.dirname(__file__), ''))
 try:
     from . import config
@@ -144,11 +147,25 @@ def settings_page():
      
 
     data['paragraph'] = reader.getParagraphText()
-    
+    data['notification'] = reader.getNotification()
     data['battery_tile_display_status'] = reader.getBatteryTileDisplayStatus() # deleted_item
     data['display_external_link_icon'] = reader.display_external_link_icon()
-    data['email_value'] = reader.getEmail()
     return render_template("settings.html",data = data)
+
+@app.route("/load_notification")
+def load_notification():
+    reader = ConfigFileReader()
+    file_path = reader.getNotificationFilePath()
+    new_mtime = time.ctime(os.path.getmtime(file_path))
+    mod_time = reader.getNotificationFileModifyTime()
+    if new_mtime != mod_time:
+        reader.setNotifcationFileModifyTime(new_mtime)
+        f = open(file_path, 'r')
+        file = f.read()
+        f.close()
+        return jsonify(file)
+    else:
+        return jsonify({})
 
 @app.route("/title-page")
 def title_page():
@@ -160,6 +177,8 @@ def title_page():
     data['current_battery_index'] = reader.getCurrentBatteryIndex()
     data['fine_tune'] = reader.getFineTune()
     data['weather_widget_display_status'] = reader.get_weather_widget_display_status()
+    data['email_value'] = reader.getEmail()
+    data['notification'] = reader.getNotification()
     return render_template("/title.html", data = data)
 
 @app.route("/add_email")
@@ -167,7 +186,6 @@ def add_email():
     email = request.args.get('email')
     reader = ConfigFileReader()
     reader.setEmail(email = email)
-    print(email , file=open("../../emailadd.txt", "w"))
     return jsonify({})
 
 @app.route("/wifi-settings-page")
@@ -204,7 +222,6 @@ def set_fine_tune():
     reader = ConfigFileReader()
     fine_tune = request.args.get('fine_tune')
     reader.setFineTune(fine_tune = fine_tune)
-    print(fine_tune , file=open("../../scripts/volt_modifier.txt", "w"))
     return jsonify({})
 
 @app.route("/set_weather_widget_display_status")
@@ -257,6 +274,7 @@ def get_data():
     data['battery_flash'] = reader.getBatteryFlashValue()
     data['weather_data_api_key'] = reader.get_weather_data_api_key()
     data['display_external_link_icon'] = reader.display_external_link_icon()
+    data['notification'] = reader.getNotification()
     data["time"] = datetime.datetime.now().strftime("%H:%M") # Passing from the server as Python has better date/time formatting options
 
     # Temperature and humidity

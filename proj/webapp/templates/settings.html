@@ -135,17 +135,7 @@
                         <!-- GO to Optional title page -->
                         <button style="margin: 35px 0px; width: 100%;" class="btn right {{data.tile_colors.0}} {{data.tile_colors.2}}" onclick="window.location.href='/title-page';">Go to Optional Titles</button>
                         
-                        <!-- Add email  -->
-                        Notification Email Address
-                        <div class="row" style="width: 100%; margin-top: -15px;">
-                            <div class="input-field col s10" style="padding-left: 0px;">
-                                <input id="email" type="text" class="virtual-keyboard validate" data-kioskboard-type="all" data-kioskboard-specialcharacters="true" placeholder="Enter email" style="background-color: white; border-radius:2px; height: 34px;" value="{{data.email_value}}">
-                                <span class="helper-text" data-error="wrong" data-success="right">Helper text</span>
-                            </div>
-                            <div class="col s2" style="padding-right: 0px;padding-left: 0px;">
-                                <button style="margin-top: 14px;width: 100%;" id="email_add_btn" onclick="emailAdd()" class="btn right {{data.tile_colors.0}} {{data.tile_colors.2}}">Add</button>                  
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -161,7 +151,6 @@
     {{data.paragraph}}
 </p>
 
-<br><br>
 
 <script>
 
@@ -183,23 +172,7 @@ function save_color_value(){
 
 }
 
-function emailAdd(){
-    var email = $("#email").val();
-    if($("#email").hasClass('validate valid')) {
-        
-        $.ajax({
-            url:"/add_email",
-            data:{
-                "email":email
-            },
-            success: function(res){
-                
-            }
-        })
-        var toastHtml = '<span style="margin: -25px; font-weight: bold; background-color: white; color: black; box-shadow: 3px; opacity: 0.9; border-radius:2px; padding: 12px;">Email is successfully added.</span>'
-        M.toast({html: toastHtml})
-    }
-}
+
 $('#total_title_to_display').change(function(){
     var total_title_to_display = $('#total_title_to_display').val()
     $.ajax({

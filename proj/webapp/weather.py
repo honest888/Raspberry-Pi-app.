@@ -29,7 +29,7 @@ def weatherFunction():
     city = reader.get_geo_location_city()
     print("-> Current city = ",city)
     api_key = reader.get_weather_data_api_key()
-    url  = f'https://api.openweathermap.org/data/2.5/history?q={city}&appid={api_key}&units=metric'
+    url  = f'https://api.openweathermap.org/data/2.5/onecall?q={city}&exclude=current,hourly,minutely,&units=metric&appid={api_key}'
     print("Weather API Response ")
     try:
         weather_data = requests.get(url).json()

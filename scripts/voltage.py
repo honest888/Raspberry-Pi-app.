@@ -2,6 +2,11 @@ import RPi.GPIO as GPIO
 import time
 from datetime import datetime
 import statistics
+import smtplib
+from email.mime.text import MIMEText
+from email.header import Header
+from email.utils import formataddr
+import base64
 
 # change these as desired - they're the pins connected from the
 # SPI port on the ADC to the Cobbler
@@ -15,6 +20,9 @@ Buzzer = 17
 #Set Voltage Lists and Varables
 Volt_list = []
 Volt_read = []
+
+Graph_repeat=5
+Read_repeat=5
 
 
 
@@ -65,8 +73,7 @@ def readadc(adcnum, clockpin, mosipin, misopin, cspin):
         adcout >>= 1       # first bit is 'null' so drop it
         return adcout
 #main ioop
-Graph_repeat=120
-Read_repeat=5
+
 
 def main():
          init()
@@ -84,18 +91,20 @@ def main():
                                 time.sleep(1)
                          Voltage = statistics.mean(Volt_read) #store average of list
                          Voltage = float(Voltage)+float(volt_modifier)
-                         Voltage = (round(Voltage, 1)) #rount to 2 decimal places
+                         Voltage = (round(Voltage, 2)) #round to 1 decimal places
                          Volt_read.clear() # clear list
                         
                          Volt_list.append(Voltage) 
                          now = datetime.now()
                          dt_string = now.strftime("%d/%m/%Y %H:%M")
                          print(str(dt_string) + str(' -> ')+ str(Voltage),file=open("../readings/voltage.txt", "w"))
+                         print(str(Voltage) + str(' now'))
                         
                  Voltage_graph = statistics.mean(Volt_list)
                  Voltage_graph_round=(round(Voltage_graph, 2)) 
                  print(str(dt_string) + str(' -> ')+ str(Voltage_graph_round),file=open("../readings/voltage_graph.txt", "a"))
                  Volt_list.clear()
+                 print(Voltage_graph_round)
                  
                  #Alert if voltage is between 1 and 11.5
                  is_between = 1 <= Voltage_graph_round <= 11.5
@@ -112,6 +121,31 @@ def main():
                          GPIO.output(Buzzer,GPIO.HIGH)
                          time.sleep(0.3)
                          GPIO.output(Buzzer,GPIO.LOW)
+                         
+                         #send email notification
+
+                         #read volt modifier file
+                         with open('../emailadd.txt') as f:
+                                 receiver = f.read()
+                         sender = "notifications@savvyvan.co.uk"
+                         print(receiver)
+
+                         msg = MIMEText('Dear User\n\nYour battery voltage is ' + str(Voltage_graph_round) + 'v\n\nPlease consult your battery product manual to resolve this error\n\nThankyou\n\nSavvyVan\nSupport@SavvyVan.co.uk\nhttps://www.savvyvan.co.uk\n\n\nPlease do not reply, this mailbox is unmonitored')
+
+                         msg['Subject'] = 'Low Voltage Alert! ' + str(Voltage_graph_round) + 'v'
+                         msg['From'] = formataddr((str(Header('SavvyVan Notifications', 'utf-8')), sender))
+                         msg['To'] = receiver
+                         msg['X-Priority'] = '2'
+
+                         user = 'outbound@ripsolutions.co.uk'
+                         password = (base64.b64decode("c2FjbXUwLUdvbWh1ay14YXF0YXA=").decode("utf-8"))
+
+                         with smtplib.SMTP("smtp.ionos.co.uk", 25) as server:
+
+                                server.login(user, password)
+                                server.sendmail(sender, receiver, msg.as_string())
+                                print('Mail Sent - Low Voltage Alert! ' + str(Voltage_graph_round) + 'v')
+                        
 
 
 

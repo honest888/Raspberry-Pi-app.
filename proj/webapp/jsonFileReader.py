@@ -75,8 +75,8 @@ class ConfigFileReader():
         self.file_path =  None
         path_options = [
             # os.path.join(os.getcwd(), 'config.json') ,
-            os.path.join('/home/pi/savvyvan', 'proj','webapp', 'config.json') ,
-            os.path.join('/home/pi/savvyvan', 'proj','webapp', 'config.json') , 
+            os.path.join('home/pi/savvyvan', 'proj','webapp', 'config.json') ,
+            os.path.join('home/pi/savvyvan', 'proj','webapp', 'config.json') , 
             os.path.join(os.getcwd(), 'webapp','config.json') ,
             os.path.join(os.getcwd(), 'config.json') ,
         ]
@@ -334,6 +334,8 @@ class ConfigFileReader():
     
     def setEmail(self, email):
         self.data['email'] = email
+        email_file_path = os.path.join(self.getBaseFolderPath(), self.data['email_file_path'])
+        print(email , file=open(email_file_path, "w"))
         self.updateDataFile(self.data)
     
     def setBatteryType(self, current_index):
@@ -345,6 +347,8 @@ class ConfigFileReader():
     
     def setFineTune(self, fine_tune):
         self.data['fine_tune'] = float(fine_tune)
+        volt_modifier_file_path = os.path.join(self.getBaseFolderPath(), self.data['volt_modifier_file_path'])
+        print(fine_tune , file=open(volt_modifier_file_path, "w"))
         self.updateDataFile(self.data)
 
     def get_weather_widget_display_status(self): 
@@ -372,7 +376,37 @@ class ConfigFileReader():
             return False
         
         return True
-         
+    def getNotificationFileModifyTime(self):
+        return self.data['notification_file_modify_time']
+
+    def setNotifcationFileModifyTime(self, mtime):
+        self.data['notification_file_modify_time'] = mtime
+        self.updateDataFile(self.data)
+
+    def getNotificationFilePath(self):
+        notification_file_path = os.path.join(self.getBaseFolderPath(),  self.data['notification_file'])
+        if not os.path.exists(notification_file_path):
+            print("*** In-Valid notification_file_path")
+        return notification_file_path
+        
+    def getNotification(self):
+        notification_file_path = self.getNotificationFilePath()
+        file = open(notification_file_path, "r")
+        return file.read()
+        # def getMenuFolderPath(self):
+        #     menu_folder_path = os.path.join(self.getBaseFolderPath(),self.data['menu_folder_path'])
+        # if not os.path.exists(menu_folder_path):
+        #     print("*** In-Valid menu_folder_path")
+        # return  menu_folder_path
+    
+        # def getMenuPythonFiles(self):
+        # menu_folder_path = self.getMenuFolderPath()
+        # python_files = []
+        # if os.path.exists(menu_folder_path):
+        #     python_files = [x for x in  os.listdir(menu_folder_path) if str(x).endswith(".py")]
+        # return python_files
+
+
     def getMaxTotalTilesToDisplay(self):
         return [x for x in range(1,int(self.data['max_total_title_to_display'])+1)] 
     

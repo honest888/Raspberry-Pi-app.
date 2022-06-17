@@ -121,7 +121,7 @@
 
  <footer class="{{data.tile_colors.0}} {{data.tile_colors.2}}">
     <img src="/static/img/logo.png" alt="" class=""> 
-    <marquee id="notification" width = "60%" style="font-size: 22px;">{{data.notification}}</marquee>
+    <marquee id="notification" class="scale-transition" width = "60%" style="font-size: 22px;">{{data.notification}}</marquee>
     <a href="/settings-page"><i class="waves-effect material-icons white-text" style="font-size: 40px;">settings</i></a>
 </footer>
 
@@ -145,7 +145,14 @@ setInterval(function(){
 },1000)
 
 
+var toggle_time = 0;
 setInterval(function(){
+
+    if(toggle_time == 10) {
+        $('#notification').addClass("scale-out")
+    }
+    else
+        toggle_time += 2
 $.ajax({
     url:'https://httpbin.org/ip',
     timeout: 2000, 
@@ -164,8 +171,11 @@ $.ajax({
 $.ajax({
         url:'/load_notification',
         success: function(res){
-            if(!jQuery.isEmptyObject(res))
+            if(!jQuery.isEmptyObject(res)) {
                 $('#notification').text(res);
+                $('#notification').removeClass("scale-out");
+                toggle_time = 0;
+            }
         },
         error: function(res){
             

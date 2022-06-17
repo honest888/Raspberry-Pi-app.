@@ -21,7 +21,7 @@
     "fine_tune": 0.2,
     "email": "SIMON@GMAIL.COM",
     "notification_file": "notification.txt",
-    "notification_file_modify_time": "Sun Jun 12 18:18:57 2022",
+    "notification_file_modify_time": "Fri Jun 17 15:22:15 2022",
     "battery_types": [
         {
             "name": "AGM",
